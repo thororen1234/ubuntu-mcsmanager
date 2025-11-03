@@ -34,6 +34,7 @@ WORKDIR /opt
 RUN wget -qO- https://script.mcsmanager.com/setup.sh | bash
 
 EXPOSE 23333 24444 2375 2376
-CMD ["bash", "-c", "dockerd & sleep 5 && \
-    /opt/node-v20.12.2-linux-x64/bin/node /opt/mcsmanager/daemon/app.js & \
-    /opt/node-v20.12.2-linux-x64/bin/node /opt/mcsmanager/web/app.js"]
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
