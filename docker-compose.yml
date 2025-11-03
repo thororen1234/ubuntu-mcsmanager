@@ -8,5 +8,7 @@ services:
       - "127.0.0.1:24444:24444"
     restart: unless-stopped
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - mcsmanager-data:/opt/mcsmana
+      - mcs-web-data:/opt/mcsmanager/web/data
+      - mcs-web-data:/opt/mcsmanager/web/logs
+      - mcs-daemon-data:/opt/mcsmanager/daemon/data
+      - mcs-daemon-data:/opt/mcsmanager/daemon/logs

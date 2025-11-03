@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -19,6 +19,10 @@ RUN apt-get update && apt-get install -y \
     iptables \
     lvm2 \
     nano \
+    tcpdump \
+    net-tools \
+    openjdk-*-jre \
+    cron \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -m 0755 -p /etc/apt/keyrings \
