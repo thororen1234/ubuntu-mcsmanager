@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  mcsmanager:
+    image: ghcr.io/thororen1234/ubuntu-mcsmanager:latest
+    ports:
+      - "127.0.0.1:23333:23333"
+      - "127.0.0.1:24444:24444"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mcsmanager-data:/opt/mcsmana

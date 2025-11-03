@@ -1,0 +1,33 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    gnupg \
+    lsb-release \
+    ca-certificates \
+    iptables \
+    uidmap \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -m 0755 -p /etc/apt/keyrings \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+    && chmod a+r /etc/apt/keyrings/docker.asc \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+    | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update \
+    && apt-get install -y docker-ce-cli docker-buildx-plugin docker-compose-plugin \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt
+
+RUN wget -qO- https://script.mcsmanager.com/setup.sh | bash
+
+EXPOSE 23333 24444
+
+CMD ["bash", "-c", "/opt/node-v20.12.2-linux-x64/bin/node /opt/mcsmanager/daemon/app.js & \
+    /opt/node-v20.12.2-linux-x64/bin/node /opt/mcsmanager/web/app.js"]
+
