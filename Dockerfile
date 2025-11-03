@@ -32,7 +32,7 @@ RUN mkdir -m 0755 -p /etc/apt/keyrings \
 
 WORKDIR /opt
 
-RUN wget -qO- https://script.mcsmanager.com/setup.sh | bash
+RUN wget -qO- https://raw.githubusercontent.com/thororen1234/MCSManager/refs/heads/master/setup.sh | bash
 
 EXPOSE 23333 24444 2375 2376
 
