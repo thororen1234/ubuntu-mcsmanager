@@ -35,6 +35,8 @@ RUN wget -qO- https://script.mcsmanager.com/setup.sh | bash
 
 EXPOSE 23333 24444 2375 2376
 
+RUN cp -r /opt/mcsmanager /opt/mcsmanager-data
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 CMD ["/entrypoint.sh"]

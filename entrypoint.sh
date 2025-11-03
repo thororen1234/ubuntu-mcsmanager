@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ -z "$(ls -A /opt/mcsmanager)" ]; then
+    cp -r /opt/mcsmanager-data/* /opt/mcsmanager/
+fi
+
 dockerd &
 
 while ! docker info >/dev/null 2>&1; do
