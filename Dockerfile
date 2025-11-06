@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     openjdk-*-jre \
     cron \
+    ssh \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -m 0755 -p /etc/apt/keyrings \
