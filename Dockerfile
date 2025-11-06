@@ -3,9 +3,7 @@ FROM node:lts-slim
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
-RUN apt-get update && apt-get install software-properties-common -y \
-    && apt-add-repository --component non-free -y \
-    && apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     wget \
     curl \
     gnupg \
@@ -24,8 +22,7 @@ RUN apt-get update && apt-get install software-properties-common -y \
     openjdk-*-jre \
     cron \
     ssh \
-    p7zip-full \
-    p7zip-rar \
+    7zip-rar \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -m 0755 -p /etc/apt/keyrings \
