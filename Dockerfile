@@ -3,7 +3,9 @@ FROM node:lts-slim
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install software-properties-common -y \
+    && apt-add-repository --component non-free -y \
+    && apt-get update && apt-get install -y \
     wget \
     curl \
     gnupg \
