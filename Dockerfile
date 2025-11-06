@@ -3,8 +3,7 @@ FROM node:lts-trixie-slim
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
-RUN apt-get update && apt-get install software-properties-common -y \
-    && apt-add-repository --component contrib non-free -y \
+RUN sed -i 's/^Components: main$/& contrib non-free non-free-firmware/' /etc/apt/sources.list.d/debian.sources \
     && apt-get update && apt-get install -y \
     wget \
     curl \
