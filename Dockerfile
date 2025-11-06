@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:lts-trixie-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
