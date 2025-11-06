@@ -1,9 +1,10 @@
-FROM node:lts
+FROM node:lts-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
-RUN apt-add-repository --component non-free \
+RUN apt-get update && apt-get install software-properties-common -y \
+    && apt-add-repository --component non-free -y \
     && apt-get update && apt-get install -y \
     wget \
     curl \
@@ -17,9 +18,6 @@ RUN apt-add-repository --component non-free \
     tar \
     iproute2 \
     socat \
-    conntrack \
-    iptables \
-    lvm2 \
     nano \
     tcpdump \
     net-tools \
