@@ -3,7 +3,8 @@ FROM node:lts
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apt-add-repository --component non-free \
+    && apt-get update && apt-get install -y \
     wget \
     curl \
     gnupg \
