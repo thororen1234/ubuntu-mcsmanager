@@ -29,11 +29,13 @@ RUN sed -i 's/^Components: main$/& contrib non-free non-free-firmware/' /etc/apt
 RUN mkdir -m 0755 -p /etc/apt/keyrings \
     && curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc \
     && chmod a+r /etc/apt/keyrings/docker.asc \
-    && printf 'Types: deb\n\
-URIs: https://download.docker.com/linux/debian\n\
-Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")\n\
-Components: stable\n\
-Signed-By: /etc/apt/keyrings/docker.asc' > /etc/apt/sources.list.d/docker.sources \
+    && cat << EOM > /etc/apt/sources.list.d/docker.sources \
+        Types: deb\n\
+        URIs: https://download.docker.com/linux/debian\n\
+        Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")\n\
+        Components: stable\n\
+        Signed-By: /etc/apt/keyrings/docker.asc
+    EOM \
     && apt-get update \
     && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     && rm -rf /var/lib/apt/lists/*
